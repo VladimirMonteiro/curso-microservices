@@ -22,11 +22,6 @@ public class OrderListener {
     @RabbitListener(queues = "pedidos.v1.pedidos-criado-gerar-notificacao")
     public void sendNotification(Order order) {
         emailService.sendEmail(order);
-
-        logger.info("TENTANDO CONSUMIR A MENSAGEM");
-        if (order.getTotalValue() == 0) {
-            throw new RuntimeException("ERROR OF EXCEPTION");
-        }
         logger.info("Notificação gerada: {}", order.toString());
 
     }
